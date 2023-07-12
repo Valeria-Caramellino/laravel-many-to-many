@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Tecnology;
 use App\Models\Type;
 
 use function PHPSTORM_META\type;
@@ -31,8 +32,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types= Type::all();
+        $tecnologies = Tecnology::all();
 
-        return view("admin.projects.create", compact('types'));
+        return view("admin.projects.create", compact('types','tecnologies'));
     }
 
     /**
@@ -43,13 +45,17 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        //dump($request->all());
         $data = $request->validated();
-
+        //dump($data);
         $newProject = new Project();
 
         $newProject->fill($data);
 
         $newProject->save();
+        //dump($newProject);
+
+        $newProject->tecnologies()->attach($data["tecnologies"]);
 
         return to_route("admin.project.show" , $newProject);
     }
@@ -75,7 +81,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types= Type::all();
-        return view('admin.projects.edit', compact('project','types'));
+        $tecnologies = Tecnology::all();
+        return view('admin.projects.edit', compact('project','types','tecnologies'));
     }
     
 
@@ -93,6 +100,8 @@ class ProjectController extends Controller
         $project->fill($data);
 
         $project->update();
+
+        $project->tecnologies()->sync($data["tecnologies"]);
 
         return to_route("admin.project.show" , $project);
     }

@@ -21,6 +21,15 @@
                 <p><span class="fw-bold">Descrizione: </span> {{ $project->content }}</p>
                 <hr>
                 <h5>Type: {{$project->type ? $project->type->name : 'Senza categoria'}}</h5>
+                <hr>
+                <h5>Tecnology:</h5>
+                <ul>
+                    @foreach ($project->tecnologies as $item)
+                        <li>{{$item->name }}</li>
+                    @endforeach
+                   
+                </ul>
+                
             </div>
         </div>
     </div>

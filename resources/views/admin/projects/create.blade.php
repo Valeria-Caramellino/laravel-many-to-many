@@ -31,15 +31,22 @@
             @enderror
 
             <label for="type_id">Type</label>
-            <select class="form-control md-4" name="type_id" id="type_id">
+            <select class="form-control md-4 @error('type_id') is-invalid @enderror" name="type_id" id="type_id">
                 <option value="" selected disabled>Selezione il type</option>
                 @foreach($types as $type)
                     <option value="{{$type->id}}">{{$type->name}}</option>
                 @endforeach
-
-                
             </select>
 
+            <div class="my-4 d-flex justify-content-between">
+                @foreach ($tecnologies as $i => $item)
+                <div class="form-check">
+                    <label for="tecnologies{{$i}}" class="form-check-label">{{$item->name}} </label>
+                    <input type="checkbox" name="tecnologies[]" id="tecnologies{{$i}}" value="{{$item->id}} " class="form-check-input">
+                </div>
+                @endforeach
+            </div>
+           
             <label for="image">URL Immagine</label>
             <input type="text" name="image" id="image" value="{{ old("image") }}" class="form-control mb-4 @error('image') is-invalid @enderror">
             @error("image")
