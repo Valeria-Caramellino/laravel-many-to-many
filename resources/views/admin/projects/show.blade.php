@@ -23,12 +23,12 @@
                 <h5>Type: {{$project->type ? $project->type->name : 'Senza categoria'}}</h5>
                 <hr>
                 <h5>Tecnology:</h5>
-                <ul>
-                    @foreach ($project->tecnologies as $item)
-                        <li>{{$item->name }}</li>
-                    @endforeach
-                   
-                </ul>
+                
+                @forelse ($project->tecnologies as $item)
+                <span >{{$item->name}} </span>
+                @empty
+                <span >Nessuna selezionata</span>
+                @endforelse
                 
             </div>
         </div>
