@@ -59,7 +59,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white"
                                     href="{{ route('admin.tecnologies.index') }}">
-                                    <i class="fa-solid fa-laptop-code fa-lg fa-fw"></i> Tecnologies
+                                    <i class="fa-solid fa-microchip "></i> Tecnologies
                                 </a>
                             </li>
 
