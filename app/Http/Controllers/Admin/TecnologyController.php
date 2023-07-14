@@ -37,7 +37,15 @@ class TecnologyController extends Controller
      */
     public function store(StoreTecnologyRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $newTecnology= new Tecnology();
+
+        $newTecnology->fill($data);
+
+        $newTecnology->save();
+
+        return to_route("admin.tecnologies.index");
     }
 
     /**
